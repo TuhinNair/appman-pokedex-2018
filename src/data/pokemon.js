@@ -7,7 +7,6 @@ const calculateStrength = (attacks) => {
 
 const calculateWeakness = (weaknesses) => {
     const weaknessMultiplier = weaknesses.length * 100;
-    console.log(`weakness length=${weaknesses.length}`)
     return weaknessMultiplier > 100 ? 0 : weaknessMultiplier
 }
 

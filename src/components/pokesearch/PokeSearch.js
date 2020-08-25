@@ -33,32 +33,12 @@ const COLORS = {
 
 const useDidMount = () => {
     const mountRef = useRef(true);
-
     useEffect(() => { mountRef.current = false }, []);
-
     return () => mountRef.current;
 }
 
-const fetchPokemonLists = ({ term, type, handlePokemonList, setNotFound }) => {
-    axios.get('http://localhost:3030/api/cards', {
-        params: {
-            limit: 20,
-            name: term,
-            type: type
-        }
-    }).then(r => {
-        let pokemons = r.data.cards.map(c => new Pokemon(c))
-        handlePokemonList(pokemons);
-    }).catch(e => {
-        if (e.response) {
-            if (e.response.status === 404) {
-                setNotFound(true);
-            }
-        } else {
-            console.log(e)
-        }
-    })
-}
+
+
 
 const PokeSearch = ({ modalRef, onAddPokemon, pokemonIdsInPokeDex }) => {
     const [search, setSearch] = useState({ term: '', type: POKEMON_TYPES.psychic });
@@ -67,6 +47,32 @@ const PokeSearch = ({ modalRef, onAddPokemon, pokemonIdsInPokeDex }) => {
     const didMount = useDidMount();
 
     useEffect(() => {
+        const fetchPokemonLists = ({ term, type, handlePokemonList, setNotFound }) => {
+            axios.get('http://localhost:3030/api/cards', {
+                params: {
+                    limit: 20,
+                    name: term,
+                    type: type
+                }
+            }).then(r => {
+                let pokemons = r.data.cards.map(c => new Pokemon(c))
+                handlePokemonList(pokemons);
+            }).catch(e => {
+                if (e.response) {
+                    if (e.response.status === 404) {
+                        setNotFound(true);
+                    }
+                } else {
+                    console.log(e)
+                }
+            })
+
+        }
+
+        const handleUpdatePokemonList = (pokemons) => {
+            setPokemonList(pokemons.filter(pk => !pokemonIdsInPokeDex.includes(pk.id)));
+        }
+
         if (!didMount() && search.term) {
             setTimeout(() => {
                 fetchPokemonLists({
@@ -75,18 +81,15 @@ const PokeSearch = ({ modalRef, onAddPokemon, pokemonIdsInPokeDex }) => {
                     handlePokemonList: handleUpdatePokemonList,
                     setNotFound: setNotFound,
                 })
-            }, 250);
+            }, 500);
         }
+
     }, [search])
 
     useEffect(() => {
-        console.log('use effect is firing')
         setPokemonList(pokemonList.filter(pk => !pokemonIdsInPokeDex.includes(pk.id)));
     }, [pokemonIdsInPokeDex])
 
-    const handleUpdatePokemonList = (pokemons) => {
-        setPokemonList(pokemons.filter(pk => !pokemonIdsInPokeDex.includes(pk.id)));
-    }
 
     const handleUpdateSearchTerm = ({ target: { value } }) => {
         setSearch({ ...search, term: value });
@@ -107,7 +110,7 @@ const PokeSearch = ({ modalRef, onAddPokemon, pokemonIdsInPokeDex }) => {
                         placeholder="Enter Pokemon Name.."
                     ></input>
                     <div className="type_button_pills">
-                        {Object.entries(POKEMON_TYPES).map(([k, v]) => {
+                        {Object.entries(POKEMON_TYPES).map(([_, v]) => {
                             return <button key={v} style={typeStyles(v, search.type)} className="type_pill" onClick={() => handleUpdateSearchType(v)}>{v}</button>
                         })}
                     </div>
