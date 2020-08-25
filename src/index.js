@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import PokeSearch from './components/pokesearch/PokeSearch'
+import PokeDex from './components/pokedex/PokeDex'
 
-ReactDOM.render(<PokeSearch />, document.getElementById('root'))
+ReactDOM.render(<PokeDex />, document.getElementById('root'))
 
 
 
