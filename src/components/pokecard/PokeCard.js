@@ -6,7 +6,7 @@ const PokeCard = ({ pokemon, onSelect, selectionText, cardWidth }) => {
     return (
         <>
             <div style={{ width: cardWidth }} className="container">
-                <button className="select_to_action" onClick={() => onSelect(pokemon)}>{selectionText}</button>
+                <span className="select_to_action" onClick={() => onSelect(pokemon)}>{selectionText}</span>
                 <div className="image_container">
                     <img src={imageUrl} className="card_image" alt={name} />
                 </div>

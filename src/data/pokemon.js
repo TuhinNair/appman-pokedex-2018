@@ -1,4 +1,4 @@
-const calculateHP = (hp) => hp > 100 ? 100 : hp
+const calculateHP = (hp) => parseInt(hp) > 100 ? 100 : hp
 
 const calculateStrength = (attacks) => {
     const attackMulitplier = attacks.length * 50;
@@ -7,6 +7,7 @@ const calculateStrength = (attacks) => {
 
 const calculateWeakness = (weaknesses) => {
     const weaknessMultiplier = weaknesses.length * 100;
+    console.log(`weakness length=${weaknesses.length}`)
     return weaknessMultiplier > 100 ? 0 : weaknessMultiplier
 }
 
@@ -20,7 +21,7 @@ const calculateDamage = (attacks) => {
 }
 
 const calculateHappiness = (hp, damage, weakness) => {
-    return ((hp / 10) + (damage /10 ) + 10 - (weakness)) / 5
+    return ((hp / 10) + (damage / 10 ) + 10 - (weakness)) / 5
 }
 
 export class Pokemon {
@@ -33,6 +34,9 @@ export class Pokemon {
         this.strength = calculateStrength(attacks);
         this.weakness = calculateWeakness(weaknesses);
         this.damage = calculateDamage(attacks);
-        this.happiness = calculateHappiness(this.hp, this.damage, this.weakness)
+    }
+
+    get happiness() {
+        return calculateHappiness(this.hp, this.damage, this.weakness)
     }
 }

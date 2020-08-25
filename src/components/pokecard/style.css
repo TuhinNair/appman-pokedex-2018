@@ -4,8 +4,14 @@
     padding: 10px;
     display: flex;
     flex-direction: row;
+    box-shadow: 2px 4px #d5d6dc;
+    background-color: #f3f4f7;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
-
+.container:hover {
+    box-shadow: 2px 4px #aeaeae;
+}
 .image_container {
     align-self: flex-start;
     width: 33%;
@@ -23,8 +29,8 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 2px;
     line-height: 200%;
+    padding: 2px 2px 2px 20px;
 }
 
 .select_to_action {
@@ -32,4 +38,10 @@
     top: 4px;
     right: 40px;
     padding: 2px;
+    color: #dc7777; 
+    cursor: pointer;
+    font-weight: bold;
+    font-size: large;
+    cursor: pointer;
 }
+

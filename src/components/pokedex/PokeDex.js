@@ -44,12 +44,14 @@ const PokeDex = () => {
     return (
         <div className="pokedex">
             <div className="pokedex_list">
-                {pokemonList.map(pk => <PokeCard key={pk.id} pokemon={pk} onSelect={handleRemovePokemon} selectionText={'X'} cardWidth={'40%'} />)}
+                {Array.isArray(pokemonList) && pokemonList.length
+                    ? pokemonList.map(pk => <PokeCard key={pk.id} pokemon={pk} onSelect={handleRemovePokemon} selectionText={'X'} cardWidth={'45%'} />)
+                    : <span>Click "Search" to find new Pokémon</span> }
             </div>
             <div className="pokedex_footer">
-                <button onClick={handleToggleSearch}>Search</button>
-                {isSearchVisible && <PokeSearch modalRef={ref} onAddPokemon={handleAddPokemon} pokemonIdsInPokeDex={pokemonList.map(pk => pk.id)} />}
+                <span style={{cursor: 'pointer'}} onClick={handleToggleSearch}>Search</span >
             </div>
+            {isSearchVisible && <PokeSearch modalRef={ref} onAddPokemon={handleAddPokemon} pokemonIdsInPokeDex={pokemonList.map(pk => pk.id)} />}
 
         </div>
     )

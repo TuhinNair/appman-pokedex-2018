@@ -1,21 +1,22 @@
 .pokedex {
-    width: 100%;
-    height: 100%;
+    width: 1024px;
+    height: 768px;
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
 }
 
 .pokedex_footer {
     padding: 40px;
     display: flex;
     justify-content: center;
+    background-color: #ec5656;
+    color: #ffffff;
 }
 .pokedex_list {
+    padding: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     overflow-y: auto;
-    flex: 1;
-    
+    flex: 1;  
 }

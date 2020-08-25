@@ -114,7 +114,7 @@ const PokeSearch = ({ modalRef, onAddPokemon, pokemonIdsInPokeDex }) => {
                 </div>
                     <div className="card_container">
                         {notFound
-                            ? <div>Not Found</div>
+                            ? <div>No pokemons found.</div>
                             : pokemonList.map(pk => <PokeCard key={pk.id} pokemon={pk} cardWidth={'100%'} onSelect={onAddPokemon} selectionText={"Add"} />)}
                     </div></>
             </div>
