@@ -39,7 +39,7 @@ const useDidMount = () => {
     return () => mountRef.current;
 }
 
-const fetchPokemonLists = ({ term, type, setPokemonList, setNotFound }) => {
+const fetchPokemonLists = ({ term, type, handlePokemonList, setNotFound }) => {
     axios.get('http://localhost:3030/api/cards', {
         params: {
             limit: 20,
@@ -48,16 +48,20 @@ const fetchPokemonLists = ({ term, type, setPokemonList, setNotFound }) => {
         }
     }).then(r => {
         let pokemons = r.data.cards.map(c => new Pokemon(c))
-        setPokemonList(pokemons);
+        handlePokemonList(pokemons);
     }).catch(e => {
-        if (e.response.status === 404) {
-            setNotFound(true);
+        if (e.response) {
+            if (e.response.status === 404) {
+                setNotFound(true);
+            }
+        } else {
+            console.log(e)
         }
     })
 }
 
-const PokeSearch = ({modalRef, onAddPokemon}) => {
-    const [search, setSearch] = useState({ term: '', type: POKEMON_TYPES.grass });
+const PokeSearch = ({ modalRef, onAddPokemon, pokemonIdsInPokeDex }) => {
+    const [search, setSearch] = useState({ term: '', type: POKEMON_TYPES.psychic });
     const [notFound, setNotFound] = useState(false);
     const [pokemonList, setPokemonList] = useState([]);
     const didMount = useDidMount();
@@ -68,12 +72,21 @@ const PokeSearch = ({modalRef, onAddPokemon}) => {
                 fetchPokemonLists({
                     term: search.term,
                     type: search.type,
-                    setPokemonList: setPokemonList,
+                    handlePokemonList: handleUpdatePokemonList,
                     setNotFound: setNotFound,
                 })
-            }, 50);
+            }, 250);
         }
     }, [search])
+
+    useEffect(() => {
+        console.log('use effect is firing')
+        setPokemonList(pokemonList.filter(pk => !pokemonIdsInPokeDex.includes(pk.id)));
+    }, [pokemonIdsInPokeDex])
+
+    const handleUpdatePokemonList = (pokemons) => {
+        setPokemonList(pokemons.filter(pk => !pokemonIdsInPokeDex.includes(pk.id)));
+    }
 
     const handleUpdateSearchTerm = ({ target: { value } }) => {
         setSearch({ ...search, term: value });
@@ -99,11 +112,11 @@ const PokeSearch = ({modalRef, onAddPokemon}) => {
                         })}
                     </div>
                 </div>
-                <div className="card_container">
-                    {notFound
-                        ? <div>Not Found</div>
-                        : pokemonList.map(pk => <PokeCard key={pk.id} pokemon={pk} cardWidth={'100%'} onSelect={onAddPokemon} selectionText={"Add"} />)}
-                </div></>
+                    <div className="card_container">
+                        {notFound
+                            ? <div>Not Found</div>
+                            : pokemonList.map(pk => <PokeCard key={pk.id} pokemon={pk} cardWidth={'100%'} onSelect={onAddPokemon} selectionText={"Add"} />)}
+                    </div></>
             </div>
         </div>
 

@@ -48,7 +48,7 @@ const PokeDex = () => {
             </div>
             <div className="pokedex_footer">
                 <button onClick={handleToggleSearch}>Search</button>
-                {isSearchVisible && <PokeSearch modalRef={ref} onAddPokemon={handleAddPokemon} />}
+                {isSearchVisible && <PokeSearch modalRef={ref} onAddPokemon={handleAddPokemon} pokemonIdsInPokeDex={pokemonList.map(pk => pk.id)} />}
             </div>
 
         </div>
