@@ -1,0 +1,28 @@
+.container {
+    height: 250px;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.image_container {
+    align-self: flex-start;
+    width: 33%;
+    height: 100%;
+    padding: 2px;
+}
+
+.card_image {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+    line-height: 200%;
+}

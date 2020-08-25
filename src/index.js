@@ -1,6 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import App from './App'
+import PokeSearch from './components/pokesearch/PokeSearch'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<PokeSearch />, document.getElementById('root'))
+
+
+
