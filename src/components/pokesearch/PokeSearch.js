@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Pokemon } from '../../data/pokemon';
 import { PokeCard } from '../pokecard/PokeCard';
-import useComponentVisible from '../../lib/hooks/useComponentVisible';
 import './style.css'
 
 const POKEMON_TYPES = {
@@ -57,7 +56,7 @@ const fetchPokemonLists = ({ term, type, setPokemonList, setNotFound }) => {
     })
 }
 
-const PokeSearch = ({modalRef}) => {
+const PokeSearch = ({modalRef, onAddPokemon}) => {
     const [search, setSearch] = useState({ term: '', type: POKEMON_TYPES.grass });
     const [notFound, setNotFound] = useState(false);
     const [pokemonList, setPokemonList] = useState([]);
@@ -85,7 +84,7 @@ const PokeSearch = ({modalRef}) => {
     }
 
     return (
-        <div className="modal" onClick={() => console.log('clicked leoy')}>
+        <div className="modal">
             <div ref={modalRef} className="modal_content">
                 <><div className="search_input">
                     <input
@@ -103,7 +102,7 @@ const PokeSearch = ({modalRef}) => {
                 <div className="card_container">
                     {notFound
                         ? <div>Not Found</div>
-                        : pokemonList.map(pk => <PokeCard key={pk.id} {...pk} />)}
+                        : pokemonList.map(pk => <PokeCard key={pk.id} pokemon={pk} cardWidth={'100%'} onSelect={onAddPokemon} selectionText={"Add"} />)}
                 </div></>
             </div>
         </div>

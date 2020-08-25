@@ -1,6 +1,6 @@
 .container {
+    position: relative;
     height: 250px;
-    width: 100%;
     padding: 10px;
     display: flex;
     flex-direction: row;
@@ -25,4 +25,11 @@
     flex-direction: column;
     padding: 2px;
     line-height: 200%;
+}
+
+.select_to_action {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px;
 }

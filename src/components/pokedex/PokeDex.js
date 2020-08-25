@@ -38,8 +38,9 @@ const PokeDex = () => {
 
     return (
         <div>
+            {pokemonList.map(p => <span>{p.name}</span>)}
             <button onClick={handleToggleSearch}>Search</button>
-            {isSearchVisible && <PokeSearch modalRef={ref}/>}
+            {isSearchVisible && <PokeSearch modalRef={ref} onAddPokemon={handleAddPokemon} />}
         </div>
     )
 }
