@@ -1,7 +1,7 @@
-import React from 'react'
-import './style.css'
+import React from 'react';
+import './style.css';
 
-export const PokeCard = ({pokemon, onSelect, selectionText, cardWidth}) => {
+const PokeCard = ({pokemon, onSelect, selectionText, cardWidth}) => {
     const { name, type, imageUrl, hp, strength, weakness, damage, happiness } = pokemon;
     return (
         <>
@@ -23,3 +23,5 @@ export const PokeCard = ({pokemon, onSelect, selectionText, cardWidth}) => {
         </>
     )
 }
+
+export default PokeCard;

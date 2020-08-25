@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Pokemon } from '../../data/pokemon';
-import { PokeCard } from '../pokecard/PokeCard';
+import PokeCard from '../pokecard/PokeCard';
 import './style.css'
 
 const POKEMON_TYPES = {

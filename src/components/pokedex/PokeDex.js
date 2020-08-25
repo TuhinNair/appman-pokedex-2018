@@ -1,5 +1,6 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PokeSearch from '../pokesearch/PokeSearch';
+import PokeCard from '../pokecard/PokeCard';
 import './style.css'
 
 const useSearchToggle = (initialState) => {
@@ -26,21 +27,30 @@ const useSearchToggle = (initialState) => {
 const PokeDex = () => {
     const [pokemonList, setPokemonList] = useState([]);
 
-    const { ref, isSearchVisible, setIsSearchVisible} = useSearchToggle(false);
+    const { ref, isSearchVisible, setIsSearchVisible } = useSearchToggle(false);
 
     const handleAddPokemon = (pokemon) => {
         setPokemonList([...pokemonList, pokemon]);
     }
 
     const handleToggleSearch = () => {
-        setIsSearchVisible(true)
+        setIsSearchVisible(true);
+    }
+
+    const handleRemovePokemon = (pokemon) => {
+        setPokemonList(pokemonList.filter(pk => pk.id !== pokemon.id));
     }
 
     return (
-        <div>
-            {pokemonList.map(p => <span>{p.name}</span>)}
-            <button onClick={handleToggleSearch}>Search</button>
-            {isSearchVisible && <PokeSearch modalRef={ref} onAddPokemon={handleAddPokemon} />}
+        <div className="pokedex">
+            <div className="pokedex_list">
+                {pokemonList.map(pk => <PokeCard key={pk.id} pokemon={pk} onSelect={handleRemovePokemon} selectionText={'X'} cardWidth={'40%'} />)}
+            </div>
+            <div className="pokedex_footer">
+                <button onClick={handleToggleSearch}>Search</button>
+                {isSearchVisible && <PokeSearch modalRef={ref} onAddPokemon={handleAddPokemon} />}
+            </div>
+
         </div>
     )
 }

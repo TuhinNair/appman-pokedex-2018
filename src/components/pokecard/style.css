@@ -29,7 +29,7 @@
 
 .select_to_action {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 4px;
+    right: 40px;
     padding: 2px;
 }
