@@ -1,6 +1,6 @@
 .container {
     position: relative;
-    height: 250px;
+    height: 260px;
     padding: 10px;
     display: flex;
     flex-direction: row;
@@ -74,6 +74,18 @@
     height: 100%;
     width: 100%;
     position: absolute;
+}
+
+.happiness_bar {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.happiness_blob {
+    height: 30px;
+    width: 30px;
+    object-fit: contain;
 }
 
 .value_tube {

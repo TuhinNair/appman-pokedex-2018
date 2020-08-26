@@ -22,7 +22,7 @@ const PokeCard = ({ pokemon, onSelect, selectionText, cardWidth }) => {
                     <Row title={"Strength"}><DataTube value={strength}/></Row>
                     <Row title={"Weakness"}><DataTube value={weakness}/></Row>
                     <Row title={"Damage"}><DataTube value={damage}/></Row>
-                    <Row title={"Happiness"}>{happiness}</Row>
+                    <Row title={"Happiness"}><HappinessBar happiness={happiness}/></Row>
 
                 </div>
             </div>
@@ -50,6 +50,18 @@ const DataTube = ({value}) => {
     <div className="data_tube"></div>
     <div style={{width: tube_width}} className="value_tube"></div>
     </>
+    )
+}
+
+const HappinessBar = ({happiness}) => {
+    let blobs = new Array(happiness).fill(<img className="happiness_blob" src="happy.png"/>);
+
+    return (
+        <>
+        <div className="happiness_bar">
+            {blobs.map((b) => b)}
+        </div>
+        </>
     )
 }
 
