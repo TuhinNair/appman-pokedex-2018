@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import './style.css';
 
 const PokeCard = ({ pokemon, onSelect, selectionText, cardWidth }) => {
@@ -6,22 +6,53 @@ const PokeCard = ({ pokemon, onSelect, selectionText, cardWidth }) => {
     return (
         <>
             <div style={{ width: cardWidth }} className="container">
-                <span className="select_to_action" onClick={() => onSelect(pokemon)}>{selectionText}</span>
+                
                 <div className="image_container">
                     <img src={imageUrl} className="card_image" alt={name} />
                 </div>
                 <div className="details">
-                    <span>Name: &nbsp;{name}</span>
-                    <span>Type: &nbsp;{type}</span>
-                    <span>HP: &nbsp;{hp}</span>
-                    <span>Strength: &nbsp;{strength}</span>
-                    <span>Weakness: &nbsp;{weakness}</span>
-                    <span>Damage: &nbsp;{damage}</span>
-                    <span>Happiness: &nbsp;{happiness}</span>
+                    <Row title={"Name"}>
+                        <div className="name_row">
+                        <span className="name_title">{name}</span>
+                        <span className="select_to_action" onClick={() => onSelect(pokemon)}>{selectionText}</span>
+                        </div>
+                    </Row>
+                    <Row title={"Type"}>{type}</Row>
+                    <Row title={"HP"}><DataTube value={hp} /></Row>
+                    <Row title={"Strength"}><DataTube value={strength}/></Row>
+                    <Row title={"Weakness"}><DataTube value={weakness}/></Row>
+                    <Row title={"Damage"}><DataTube value={damage}/></Row>
+                    <Row title={"Happiness"}>{happiness}</Row>
+
                 </div>
             </div>
         </>
     )
 }
+
+const Row = ({ title, children }) =>
+    <div className="card_row">
+        <div className="row_title">
+            <span>{title}: &nbsp;</span>
+        </div>
+        <div className="row_data">
+            {children}
+        </div>
+    </div>
+
+
+const DataTube = ({value}) => {
+    let tube_width = value > 100 ? `100%` : `${value}%`
+
+
+    return (
+    <>
+    <div className="data_tube"></div>
+    <div style={{width: tube_width}} className="value_tube"></div>
+    </>
+    )
+}
+
+
 
 export default PokeCard;

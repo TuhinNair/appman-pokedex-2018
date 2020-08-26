@@ -43,6 +43,9 @@ const PokeDex = () => {
 
     return (
         <div className="pokedex">
+            <div className="pokedex_header">
+                <h1>My PokéDex</h1>
+            </div>
             <div className="pokedex_list">
                 {Array.isArray(pokemonList) && pokemonList.length
                     ? pokemonList.map(pk => <PokeCard key={pk.id} pokemon={pk} onSelect={handleRemovePokemon} selectionText={'X'} cardWidth={'45%'} />)

@@ -33,11 +33,16 @@
     padding: 2px 2px 2px 20px;
 }
 
+.name_row {
+    display: flex;
+}
+
+.name_title {
+    flex: 1;
+}
+
 .select_to_action {
-    position: absolute;
-    top: 4px;
-    right: 40px;
-    padding: 2px;
+    width : 10%;
     color: #dc7777; 
     cursor: pointer;
     font-weight: bold;
@@ -45,3 +50,36 @@
     cursor: pointer;
 }
 
+.card_row {
+    display: flex;
+    width: 100%;
+    padding: 2px;
+}
+
+.row_title {
+    height: 100%;
+    width: 33%;
+}
+
+.row_data {
+    height: 100%;
+    flex: 1;
+    position: relative;
+}
+
+.data_tube {
+    border-radius: 12px;
+    background-color: #e4e4e4;
+    box-shadow: #d4d4d4;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.value_tube {
+    border-radius: 12px;
+    z-index: 1;
+    height: 100%;
+    background-color: sandybrown;
+    position: absolute;
+}
