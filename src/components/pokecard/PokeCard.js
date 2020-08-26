@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import './style.css';
 
 const PokeCard = ({ pokemon, onSelect, selectionText, cardWidth }) => {
@@ -54,7 +54,7 @@ const DataTube = ({value}) => {
 }
 
 const HappinessBar = ({happiness}) => {
-    let blobs = new Array(happiness).fill(<img className="happiness_blob" src="happy.png"/>);
+    let blobs = new Array(happiness).fill(<img className="happiness_blob" src="happy.png" alt="happy.png"/>);
 
     return (
         <>
